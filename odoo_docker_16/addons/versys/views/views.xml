@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <record id="view_versys_commercial_form" model="ir.ui.view">
+            <field name="name">view.versys.commercial.form</field>
+            <field name="model">versys.commercial</field>
+            <field name="arch" type="xml">
+                <form string="Contratación">
+                    <sheet>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="commercial_name"/>
+                                <field name="commercial_id"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="client_name"/>
+                                <field name="client_id"/>
+                            </group>
+                        </group>
+                        <group name="group_bottom">
+                            <field name="product"/>
+                            <field name="cost"/>
+                            <field name="payment_method"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_versys_commercial_tree" model="ir.ui.view">
+            <field name="name">view.versys.commercial.tree</field>
+            <field name="model">versys.commercial</field>
+            <field name="arch" type="xml">
+                <tree string="commmercial">
+                    <field name="commercial_name"/>
+                    <field name="commercial_id"/>
+                    <field name="client_name"/>
+                    <field name="client_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_versys_commercial_kanban" model="ir.ui.view">
+            <field name="name">view.versys.commercial.kanban</field>
+            <field name="model">versys.commercial</field>
+            <field name="arch" type="xml">
+                <kanban class="o_versys_commercial_kanban">
+                    <field name="commercial_name"/>
+                    <field name="commercial_id"/>
+                    <field name="client_name"/>
+                    <field name="client_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="commercial_name"/>
+                                        <field name="commercial_id"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_versys_commercial_view" model="ir.actions.act_window">
+            <field name="name">Orden</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">versys.commercial</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Órdenes
+                </p>
+                <p>
+                    Genera una nueva orden
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_versys_root" name="VERSYS" sequence="10"/>
+
+        <menuitem id="menu_versys_commercial_categ" name="Comercial" parent="menu_versys_root" sequence="0"/>
+        <menuitem id="menu_versys_admin_categ" name="Administración" parent="menu_versys_root" sequence="1"/>
+
+        <menuitem id="menu_versys_commercial_contract" name="Contratación" parent="menu_versys_commercial_categ" sequence="0"
+                  action="action_versys_commercial_view"/>
+        <menuitem id="menu_versys_commercial_clients" name="Clientes" parent="menu_versys_commercial_categ" sequence="1"
+                  action="action_versys_commercial_view"/>
+        <menuitem id="menu_versys_commercial_notes" name="Agenda" parent="menu_versys_commercial_categ" sequence="2"
+                  action="action_versys_commercial_view"/>
+
+        <menuitem id="menu_versys_admin_informs" name="Informes" parent="menu_versys_admin_categ" sequence="0"
+                  action="action_versys_commercial_view"/>
+    </data>
+</odoo>
